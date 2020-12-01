@@ -1,0 +1,27 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    MKoprek\CQRSBus\CommandBus\CommandBus:
+        class: MKoprek\CQRSBus\CommandBus\CommandBus
+        arguments:
+            - '@tactician.commandbus'
+
+    MKoprek\CQRSBus\CommandBus\CommandBusInterface:
+        class: MKoprek\CQRSBus\CommandBus\CommandBus
+
+    MKoprek\CQRSBus\QueryBus\QueryBus:
+        class: MKoprek\CQRSBus\QueryBus\QueryBus
+        arguments:
+            - '@service_container'
+            - '@MKoprek\CQRSBus\QueryBus\Resolver\FQCNBasedResolver'
+
+    MKoprek\CQRSBus\QueryBus\QueryBusInterface:
+        class: MKoprek\CQRSBus\QueryBus\QueryBus
+
+    MKoprek\CQRSBus\QueryBus\Resolver\FQCNBasedResolver:
+        class: MKoprek\CQRSBus\QueryBus\Resolver\FQCNBasedResolver
+
+    MKoprek\CQRSBus\QueryBus\Resolver\ResolverInterface:
+        class: MKoprek\CQRSBus\QueryBus\Resolver\FQCNBasedResolver
